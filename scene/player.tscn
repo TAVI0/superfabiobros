@@ -1,7 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvdekmr4f3r37"]
+[gd_scene load_steps=12 format=3 uid="uid://cvdekmr4f3r37"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_17b51"]
 [ext_resource type="Texture2D" uid="uid://6b8ohi06t35w" path="res://assets/sprites/bazzabogan.png" id="1_umj7o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvbjr"]
+atlas = ExtResource("1_umj7o")
+region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_df42i"]
 atlas = ExtResource("1_umj7o")
@@ -25,6 +29,14 @@ region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_l6xfm"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvbjr")
+}],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_df42i")
@@ -67,7 +79,7 @@ script = ExtResource("1_17b51")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_l6xfm")
-animation = &"idle"
+animation = &"die"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)

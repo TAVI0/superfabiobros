@@ -1,16 +1,21 @@
 extends CharacterBody2D
 
+var is_dying = false
 var is_jumping = false
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
-
+@onready var deathTimer = $deathTimer
 func _ready():
 	add_to_group("Player")
+	#deathTimer.connect("timeout", Callable(self, "_on_death_timer_timeout"))
 
 func _physics_process(delta: float) -> void:
+	if is_dying:
+		return
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -34,6 +39,9 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func update_animation(direction):
+	if is_dying:
+		return
+		
 	if is_jumping:
 		animated_sprite_2d.play("jump")
 	elif direction != 0:
@@ -45,4 +53,24 @@ func update_animation(direction):
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
-		queue_free()
+		die()
+
+func die():
+	if is_dying:
+		return
+	is_dying = true
+	animated_sprite_2d.play("die")
+	await move_player_up_and_down()
+	get_tree().reload_current_scene()
+
+func move_player_up_and_down():
+	var start_position = position
+	var up_position = start_position + Vector2(0,-100)
+	var down_position = start_position + Vector2(0, 600)
+	
+	while position.y > up_position.y:
+		position.y -=4
+		await  get_tree().create_timer(0.01).timeout
+	while position.y < down_position.y:
+		position.y +=4
+		await  get_tree().create_timer(0.01).timeout
