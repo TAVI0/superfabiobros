@@ -7,7 +7,7 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 @onready var animated_sprite_2d = $AnimatedSprite2D
-@onready var deathTimer = $deathTimer
+#@onready var deathTimer = $deathTimer
 func _ready():
 	add_to_group("Player")
 	#deathTimer.connect("timeout", Callable(self, "_on_death_timer_timeout"))
@@ -74,3 +74,8 @@ func move_player_up_and_down():
 	while position.y < down_position.y:
 		position.y +=4
 		await  get_tree().create_timer(0.01).timeout
+
+
+func _on_pitfall_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Player"):
+		die()

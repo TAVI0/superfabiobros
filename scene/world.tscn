@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://fi0fibaboee"]
+[gd_scene load_steps=10 format=4 uid="uid://fi0fibaboee"]
 
 [ext_resource type="Texture2D" uid="uid://i1ueo2vnxygq" path="res://assets/sprites/block.png" id="1_fnx26"]
 [ext_resource type="Texture2D" uid="uid://xn6rkd5hk8ep" path="res://assets/sprites/brick.png" id="2_qda8i"]
 [ext_resource type="PackedScene" uid="uid://cvdekmr4f3r37" path="res://scene/player.tscn" id="3_lsdy4"]
 [ext_resource type="PackedScene" uid="uid://dttqv5q0nid57" path="res://scene/toad.tscn" id="4_fbmxr"]
+[ext_resource type="PackedScene" uid="uid://bisukca64qe3e" path="res://scene/rupia.tscn" id="5_5kcc1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4sx2j"]
 texture = ExtResource("1_fnx26")
@@ -20,6 +21,9 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_4sx2j")
 sources/1 = SubResource("TileSetAtlasSource_7jix0")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8ubw"]
+size = Vector2(2219, 20)
+
 [node name="world" type="Node2D"]
 position = Vector2(0, 19)
 
@@ -29,13 +33,45 @@ tile_map_data = PackedByteArray("AAAAAA0AAQAAAAAAAAAAAA4AAQAAAAAAAAABAA0AAQAAAAA
 tile_set = SubResource("TileSet_ssjc8")
 
 [node name="player" parent="." instance=ExtResource("3_lsdy4")]
-position = Vector2(60, 552)
+position = Vector2(51, 568)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(3, -17)
+position = Vector2(0, 2)
+zoom = Vector2(1.815, 1.815)
 limit_left = 0
 limit_top = 0
 limit_bottom = 648
+drag_horizontal_offset = 0.4
 
 [node name="toad" parent="." instance=ExtResource("4_fbmxr")]
-position = Vector2(425, 476)
+position = Vector2(322, 582)
+
+[node name="pitfall" type="Area2D" parent="."]
+position = Vector2(20, 660)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pitfall"]
+position = Vector2(1100, -24)
+shape = SubResource("RectangleShape2D_h8ubw")
+
+[node name="Rupia" parent="." instance=ExtResource("5_5kcc1")]
+position = Vector2(400, 436)
+
+[node name="Rupia2" parent="." instance=ExtResource("5_5kcc1")]
+position = Vector2(184, 557)
+
+[node name="toad2" parent="." instance=ExtResource("4_fbmxr")]
+position = Vector2(684, 539)
+
+[node name="toad3" parent="." instance=ExtResource("4_fbmxr")]
+position = Vector2(267, 546)
+
+[node name="Rupia3" parent="." instance=ExtResource("5_5kcc1")]
+position = Vector2(200, 557)
+
+[node name="Rupia4" parent="." instance=ExtResource("5_5kcc1")]
+position = Vector2(216, 557)
+
+[node name="Rupia5" parent="." instance=ExtResource("5_5kcc1")]
+position = Vector2(168, 557)
+
+[connection signal="body_entered" from="pitfall" to="player" method="_on_pitfall_body_entered"]
