@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://fi0fibaboee"]
+[gd_scene load_steps=11 format=4 uid="uid://fi0fibaboee"]
 
 [ext_resource type="Texture2D" uid="uid://i1ueo2vnxygq" path="res://assets/sprites/block.png" id="1_fnx26"]
 [ext_resource type="Texture2D" uid="uid://xn6rkd5hk8ep" path="res://assets/sprites/brick.png" id="2_qda8i"]
 [ext_resource type="PackedScene" uid="uid://cvdekmr4f3r37" path="res://scene/player.tscn" id="3_lsdy4"]
 [ext_resource type="PackedScene" uid="uid://dttqv5q0nid57" path="res://scene/toad.tscn" id="4_fbmxr"]
 [ext_resource type="PackedScene" uid="uid://bisukca64qe3e" path="res://scene/rupia.tscn" id="5_5kcc1"]
+[ext_resource type="PackedScene" uid="uid://cnxbcwl1fh70f" path="res://scene/big_toad.tscn" id="6_6udnn"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4sx2j"]
 texture = ExtResource("1_fnx26")
@@ -43,9 +44,6 @@ limit_top = 0
 limit_bottom = 648
 drag_horizontal_offset = 0.4
 
-[node name="toad" parent="." instance=ExtResource("4_fbmxr")]
-position = Vector2(322, 582)
-
 [node name="pitfall" type="Area2D" parent="."]
 position = Vector2(20, 660)
 
@@ -60,10 +58,7 @@ position = Vector2(400, 436)
 position = Vector2(184, 557)
 
 [node name="toad2" parent="." instance=ExtResource("4_fbmxr")]
-position = Vector2(684, 539)
-
-[node name="toad3" parent="." instance=ExtResource("4_fbmxr")]
-position = Vector2(267, 546)
+position = Vector2(160, 589)
 
 [node name="Rupia3" parent="." instance=ExtResource("5_5kcc1")]
 position = Vector2(200, 557)
@@ -73,5 +68,11 @@ position = Vector2(216, 557)
 
 [node name="Rupia5" parent="." instance=ExtResource("5_5kcc1")]
 position = Vector2(168, 557)
+
+[node name="BigToad" parent="." instance=ExtResource("6_6udnn")]
+position = Vector2(264, 557)
+
+[node name="BigToad2" parent="." instance=ExtResource("6_6udnn")]
+position = Vector2(344, 581)
 
 [connection signal="body_entered" from="pitfall" to="player" method="_on_pitfall_body_entered"]
