@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=4 uid="uid://chlr26plvx6al"]
+
+[ext_resource type="Texture2D" uid="uid://8iuv38morelt" path="res://scene/worlds/lvl2-block.png" id="1_78j32"]
+[ext_resource type="Texture2D" uid="uid://wpn0mp4qa35b" path="res://scene/worlds/lvl2-brick.png" id="2_m8u8b"]
+[ext_resource type="PackedScene" uid="uid://cvdekmr4f3r37" path="res://scene/player.tscn" id="3_48w1n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v3swm"]
+size = Vector2(2219, 20)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tpo4i"]
+texture = ExtResource("1_78j32")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8, -8, -8)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ivbmb"]
+texture = ExtResource("2_m8u8b")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(8, -8, 8, 8, -8, 8, -8, -8, 8, -8)
+
+[sub_resource type="TileSet" id="TileSet_8dv5b"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_tpo4i")
+sources/1 = SubResource("TileSetAtlasSource_ivbmb")
+
+[node name="underworld" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [350.0]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 904.0
+offset_bottom = 400.0
+color = Color(0, 0.142266, 0.279364, 1)
+
+[node name="player" parent="." instance=ExtResource("3_48w1n")]
+position = Vector2(33, 316)
+
+[node name="Camera2D" type="Camera2D" parent="player"]
+position = Vector2(1, -4)
+zoom = Vector2(1.815, 1.815)
+limit_left = 0
+limit_top = 0
+limit_bottom = 350
+drag_horizontal_offset = 0.4
+
+[node name="pitfall" type="Area2D" parent="."]
+position = Vector2(52, 878)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pitfall"]
+position = Vector2(1052, -494)
+shape = SubResource("RectangleShape2D_v3swm")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(-1, 85)
+tile_map_data = PackedByteArray("AAAAABAAAAAAAAAAAAABABAAAAAAAAAAAAACABAAAAAAAAAAAAADABAAAAAAAAAAAAAEABAAAAAAAAAAAAAFABAAAAAAAAAAAAAGABAAAAAAAAAAAAAHABAAAAAAAAAAAAAIABAAAAAAAAAAAAAJABAAAAAAAAAAAAAKABAAAAAAAAAAAAALABAAAAAAAAAAAAAMABAAAAAAAAAAAAANABAAAAAAAAAAAAAOABAAAAAAAAAAAAAPABAAAAAAAAAAAAAQABAAAAAAAAAAAAARABAAAAAAAAAAAAASABAAAAAAAAAAAAATABAAAAAAAAAAAAAUABAAAAAAAAAAAAAVABAAAAAAAAAAAAAWABAAAAAAAAAAAAAXABAAAAAAAAAAAAAYABAAAAAAAAAAAAAcABAAAAAAAAAAAAAdABAAAAAAAAAAAAAeABAAAAAAAAAAAAAfABAAAAAAAAAAAAAgABAAAAAAAAAAAAAhABAAAAAAAAAAAAAiABAAAAAAAAAAAAAjABAAAAAAAAAAAAAkABAAAAAAAAAAAAAlABAAAAAAAAAAAAAmABAAAAAAAAAAAAAnABAAAAAAAAAAAAAoABAAAAAAAAAAAAApABAAAAAAAAAAAAAqABAAAAAAAAAAAAArABAAAAAAAAAAAAAsABAAAAAAAAAAAAAtABAAAAAAAAAAAAAuABAAAAAAAAAAAAAvABAAAAAAAAAAAAAwABAAAAAAAAAAAAAxABAAAAAAAAAAAAAyABAAAAAAAAAAAAAzABAAAAAAAAAAAAA0ABAAAAAAAAAAAAA1ABAAAAAAAAAAAAA2ABAAAAAAAAAAAAA3ABAAAAAAAAAAAAA4ABAAAAAAAAAAAAAAAA8AAQAAAAAAAAAAAA4AAQAAAAAAAAAAAA0AAQAAAAAAAAAAAAwAAQAAAAAAAAAAAAsAAQAAAAAAAAAAAAoAAQAAAAAAAAAAAAkAAQAAAAAAAAAAAAgAAQAAAAAAAAAAAAcAAQAAAAAAAAAAAAYAAQAAAAAAAAAAAAUAAQAAAAAAAAAYAAsAAQAAAAAAAAAYAAwAAQAAAAAAAAAYAA0AAQAAAAAAAAAYAA4AAQAAAAAAAAAYAA8AAQAAAAAAAAAXAAwAAQAAAAAAAAAXAA0AAQAAAAAAAAAXAA4AAQAAAAAAAAAWAA4AAQAAAAAAAAAWAA8AAQAAAAAAAAAWAA0AAQAAAAAAAAAXAA8AAQAAAAAAAAAVAA4AAQAAAAAAAAAVAA8AAQAAAAAAAAAUAA8AAQAAAAAAAAAcAAsAAQAAAAAAAAAcAAwAAQAAAAAAAAAcAA0AAQAAAAAAAAAcAA4AAQAAAAAAAAAcAA8AAQAAAAAAAAAdAAwAAQAAAAAAAAAdAA0AAQAAAAAAAAAdAA4AAQAAAAAAAAAdAA8AAQAAAAAAAAAeAA0AAQAAAAAAAAAeAA4AAQAAAAAAAAAeAA8AAQAAAAAAAAAfAA4AAQAAAAAAAAAfAA8AAQAAAAAAAAAgAA8AAQAAAAAAAAA=")
+tile_set = SubResource("TileSet_8dv5b")
+
+[connection signal="body_entered" from="pitfall" to="player" method="_on_pitfall_body_entered"]
