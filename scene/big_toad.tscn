@@ -71,7 +71,7 @@ animations = [{
 size = Vector2(15, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvdkj"]
-size = Vector2(16, 2)
+size = Vector2(15, 2)
 
 [node name="BigToad" type="CharacterBody2D"]
 script = ExtResource("1_makc4")
@@ -92,7 +92,7 @@ position = Vector2(0, -12)
 rotation = 3.14159
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(4.44253e-06, -1)
+position = Vector2(-0.499997, -1)
 shape = SubResource("RectangleShape2D_nvdkj")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

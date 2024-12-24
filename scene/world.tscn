@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://fi0fibaboee"]
+[gd_scene load_steps=12 format=4 uid="uid://fi0fibaboee"]
 
 [ext_resource type="Texture2D" uid="uid://i1ueo2vnxygq" path="res://assets/sprites/block.png" id="1_fnx26"]
 [ext_resource type="Texture2D" uid="uid://xn6rkd5hk8ep" path="res://assets/sprites/brick.png" id="2_qda8i"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dttqv5q0nid57" path="res://scene/toad.tscn" id="4_fbmxr"]
 [ext_resource type="PackedScene" uid="uid://bisukca64qe3e" path="res://scene/rupia.tscn" id="5_5kcc1"]
 [ext_resource type="PackedScene" uid="uid://cnxbcwl1fh70f" path="res://scene/big_toad.tscn" id="6_6udnn"]
+[ext_resource type="PackedScene" uid="uid://lq1ertd5ucs4" path="res://scene/coin_gui.tscn" id="7_1gvfw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4sx2j"]
 texture = ExtResource("1_fnx26")
@@ -74,5 +75,7 @@ position = Vector2(264, 557)
 
 [node name="BigToad2" parent="." instance=ExtResource("6_6udnn")]
 position = Vector2(344, 581)
+
+[node name="coin_gui" parent="." instance=ExtResource("7_1gvfw")]
 
 [connection signal="body_entered" from="pitfall" to="player" method="_on_pitfall_body_entered"]
