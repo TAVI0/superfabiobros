@@ -61,7 +61,12 @@ func die():
 	is_dying = true
 	animated_sprite_2d.play("die")
 	await move_player_up_and_down()
-	get_tree().reload_current_scene()
+	GLOBAL.lives -= 1
+	if GLOBAL.lives > 0:
+		print("RELOAD SCENE")
+		get_tree().reload_current_scene()
+	else:
+		queue_free()
 
 func move_player_up_and_down():
 	var start_position = position

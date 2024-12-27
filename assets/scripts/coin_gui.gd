@@ -8,4 +8,5 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	$Label.text = "Coins: "+ str(GLOBAL.total_coins)
+	$Coins.text = "Coins: "+ str(GLOBAL.total_coins)
+	$Lives.text = "Lives: "+ str(GLOBAL.lives)

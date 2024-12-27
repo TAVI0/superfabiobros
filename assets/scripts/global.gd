@@ -2,6 +2,7 @@ extends Node
 
 var total_coins = 0
 
+var lives = 3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
