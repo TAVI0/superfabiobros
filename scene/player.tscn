@@ -75,6 +75,7 @@ size = Vector2(14, 31)
 size = Vector2(16, 32)
 
 [node name="player" type="CharacterBody2D"]
+visibility_layer = 25
 script = ExtResource("1_17b51")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

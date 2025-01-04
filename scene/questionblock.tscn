@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ex8ifbg2imd7"]
+
+[ext_resource type="Texture2D" uid="uid://mhpm88anemu6" path="res://assets/sprites/questionblock.png" id="1_vpamy"]
+[ext_resource type="Script" path="res://assets/scripts/questionblock.gd" id="1_yokpu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqqv7"]
+size = Vector2(16, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8io7"]
+size = Vector2(16, 14)
+
+[node name="questionblock" type="Area2D"]
+script = ExtResource("1_yokpu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_lqqv7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vpamy")
+hframes = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_v8io7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

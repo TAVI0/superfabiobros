@@ -69,6 +69,8 @@ func die():
 		get_tree().change_scene_to_file("res://scene/gameover.tscn")
 
 func move_player_up_and_down():
+	$CollisionShape2D.free()
+	$hitbox/CollisionShape2D.free()
 	var start_position = position
 	var up_position = start_position + Vector2(0,-100)
 	var down_position = start_position + Vector2(0, 600)

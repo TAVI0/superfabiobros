@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://fi0fibaboee"]
+[gd_scene load_steps=17 format=4 uid="uid://fi0fibaboee"]
 
 [ext_resource type="Script" path="res://assets/scripts/world.gd" id="1_6vwgr"]
 [ext_resource type="Texture2D" uid="uid://i1ueo2vnxygq" path="res://assets/sprites/block.png" id="2_h2362"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bisukca64qe3e" path="res://scene/rupia.tscn" id="7_gadjd"]
 [ext_resource type="PackedScene" uid="uid://dttqv5q0nid57" path="res://scene/toad.tscn" id="8_0v5sr"]
 [ext_resource type="PackedScene" uid="uid://cnxbcwl1fh70f" path="res://scene/big_toad.tscn" id="9_jxvbd"]
+[ext_resource type="PackedScene" uid="uid://ex8ifbg2imd7" path="res://scene/questionblock.tscn" id="10_jlpeq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4sx2j"]
 texture = ExtResource("2_h2362")
@@ -102,6 +103,9 @@ position = Vector2(1368, 589)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="transition"]
 position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_ba7bn")
+
+[node name="questionblock" parent="." instance=ExtResource("10_jlpeq")]
+position = Vector2(96, 549)
 
 [connection signal="body_entered" from="pitfall" to="player" method="_on_pitfall_body_entered"]
 [connection signal="body_entered" from="transition" to="." method="_on_transition_body_entered"]
