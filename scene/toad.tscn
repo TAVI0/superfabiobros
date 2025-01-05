@@ -91,4 +91,6 @@ shape = SubResource("RectangleShape2D_ab8fo")
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_7t1kj")
 
+[node name="ThongFireTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

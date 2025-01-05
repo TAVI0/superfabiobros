@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://xn6rkd5hk8ep" path="res://assets/sprites/brick.png" id="3_4t7sg"]
 [ext_resource type="Texture2D" uid="uid://b1ru133sxp764" path="res://assets/sprites/flagpole.png" id="4_eg82y"]
 [ext_resource type="PackedScene" uid="uid://cvdekmr4f3r37" path="res://scene/player.tscn" id="5_2hi67"]
+[ext_resource type="PackedScene" uid="uid://2wsla5ofe2nv" path="res://scene/pitfall.tscn" id="6_snq54"]
 [ext_resource type="PackedScene" uid="uid://lq1ertd5ucs4" path="res://scene/coin_gui.tscn" id="6_wsqvw"]
 [ext_resource type="PackedScene" uid="uid://bisukca64qe3e" path="res://scene/rupia.tscn" id="7_gadjd"]
 [ext_resource type="PackedScene" uid="uid://dttqv5q0nid57" path="res://scene/toad.tscn" id="8_0v5sr"]
@@ -33,9 +34,6 @@ sources/0 = SubResource("TileSetAtlasSource_4sx2j")
 sources/1 = SubResource("TileSetAtlasSource_7jix0")
 sources/2 = SubResource("TileSetAtlasSource_i1c5i")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8ubw"]
-size = Vector2(2219, 20)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ba7bn"]
 radius = 16.0
 
@@ -60,12 +58,7 @@ limit_top = 0
 limit_bottom = 648
 drag_horizontal_offset = 0.4
 
-[node name="pitfall" type="Area2D" parent="."]
-position = Vector2(20, 660)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pitfall"]
-position = Vector2(1100, -24)
-shape = SubResource("RectangleShape2D_h8ubw")
+[node name="pitfall" parent="." instance=ExtResource("6_snq54")]
 
 [node name="coin_gui" parent="." instance=ExtResource("6_wsqvw")]
 
@@ -89,13 +82,16 @@ position = Vector2(168, 576)
 [node name="enemies" type="Node" parent="."]
 
 [node name="toad2" parent="enemies" instance=ExtResource("8_0v5sr")]
-position = Vector2(160, 608)
+position = Vector2(424, 496)
 
 [node name="BigToad" parent="enemies" instance=ExtResource("9_jxvbd")]
 position = Vector2(264, 576)
 
 [node name="BigToad2" parent="enemies" instance=ExtResource("9_jxvbd")]
 position = Vector2(344, 600)
+
+[node name="questionblock" parent="enemies" instance=ExtResource("10_jlpeq")]
+position = Vector2(160, 536)
 
 [node name="transition" type="Area2D" parent="."]
 position = Vector2(1368, 589)
@@ -105,7 +101,6 @@ position = Vector2(0, -16)
 shape = SubResource("CircleShape2D_ba7bn")
 
 [node name="questionblock" parent="." instance=ExtResource("10_jlpeq")]
-position = Vector2(96, 549)
+position = Vector2(88, 525)
 
-[connection signal="body_entered" from="pitfall" to="player" method="_on_pitfall_body_entered"]
 [connection signal="body_entered" from="transition" to="." method="_on_transition_body_entered"]

@@ -1,0 +1,70 @@
+[gd_scene load_steps=11 format=3 uid="uid://bl4lw7f8akt0r"]
+
+[ext_resource type="Texture2D" uid="uid://dngrr5xqi0quj" path="res://assets/sprites/thong.png" id="1_72fj3"]
+[ext_resource type="Script" path="res://assets/scripts/thonge.gd" id="1_k8uep"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h38th"]
+radius = 12.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jj14"]
+atlas = ExtResource("1_72fj3")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7spg"]
+atlas = ExtResource("1_72fj3")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsmkm"]
+atlas = ExtResource("1_72fj3")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipgl2"]
+atlas = ExtResource("1_72fj3")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c66o6"]
+atlas = ExtResource("1_72fj3")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lxpn3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jj14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7spg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsmkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipgl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c66o6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_47uex"]
+
+[node name="thonge" type="Area2D"]
+scale = Vector2(0.36, 0.36)
+script = ExtResource("1_k8uep")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h38th")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lxpn3")
+frame_progress = 0.525613
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_47uex")
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
