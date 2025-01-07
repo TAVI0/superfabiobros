@@ -7,6 +7,7 @@ size = Vector2(2219, 20)
 
 [node name="pitfall" type="Area2D"]
 position = Vector2(20, 660)
+collision_mask = 2
 script = ExtResource("1_dacdn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

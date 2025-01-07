@@ -12,7 +12,7 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	if !$RayCast2D.is_colliding() && is_on_floor():
+	if !$RayCast2Dfool.is_colliding() && is_on_floor():
 		flip()
 	if $RayCast2D2.is_colliding() && is_on_floor():
 		flip()

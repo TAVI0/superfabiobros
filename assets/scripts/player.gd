@@ -76,6 +76,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 				die()
 			GLOBAL.PlayerState.BIG:
 				GLOBAL.current_state = GLOBAL.PlayerState.SMALL
+				become_small()
 			GLOBAL.PlayerState.THONG:
 				GLOBAL.current_state = GLOBAL.PlayerState.BIG	
 
@@ -86,6 +87,7 @@ func die():
 	animated_sprite_2d.play("die")
 	await move_player_up_and_down()
 	GLOBAL.lives -= 1
+	become_small()
 	if GLOBAL.lives > 0:
 		print("RELOAD SCENE")
 		get_tree().reload_current_scene()

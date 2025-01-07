@@ -1,7 +1,7 @@
 extends Node
 
 var total_coins = 0
-var lives = 3
+var lives = 30
 enum PlayerState { SMALL, BIG, THONG }
 var current_state = PlayerState.SMALL
 

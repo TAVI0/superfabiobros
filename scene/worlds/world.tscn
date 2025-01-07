@@ -49,7 +49,7 @@ tile_map_data = PackedByteArray("AAAAAA0AAQAAAAAAAAAAAA4AAQAAAAAAAAABAA0AAQAAAAA
 tile_set = SubResource("TileSet_ssjc8")
 
 [node name="player" parent="." instance=ExtResource("5_2hi67")]
-position = Vector2(51, 568)
+position = Vector2(48, 581)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(0, 2)
@@ -96,6 +96,7 @@ position = Vector2(160, 536)
 
 [node name="transition" type="Area2D" parent="."]
 position = Vector2(1368, 589)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="transition"]
 position = Vector2(0, -16)
@@ -103,5 +104,8 @@ shape = SubResource("CircleShape2D_ba7bn")
 
 [node name="questionblock" parent="." instance=ExtResource("10_jlpeq")]
 position = Vector2(88, 525)
+
+[node name="toad2" parent="." instance=ExtResource("8_0v5sr")]
+position = Vector2(136, 589)
 
 [connection signal="body_entered" from="transition" to="." method="_on_transition_body_entered"]
