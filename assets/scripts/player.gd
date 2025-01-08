@@ -6,6 +6,8 @@ var is_big = false
 var is_firing_thong = false
 var can_fire_thong = false
 var player_direction = 1
+var invulnerable = false
+var damaged = false
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -70,15 +72,41 @@ func update_animation(direction):
 				animated_sprite_2d.play("thong_idle")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
+	if body.is_in_group("Enemy") and !invulnerable:
 		match GLOBAL.current_state:
 			GLOBAL.PlayerState.SMALL:
 				die()
 			GLOBAL.PlayerState.BIG:
-				GLOBAL.current_state = GLOBAL.PlayerState.SMALL
 				become_small()
 			GLOBAL.PlayerState.THONG:
-				GLOBAL.current_state = GLOBAL.PlayerState.BIG	
+				GLOBAL.current_state = GLOBAL.PlayerState.BIG
+		print("intocable")
+		damaged = true
+		if(!is_dying):
+			await make_invulnerable(2)
+		damaged =false
+		print("tocable")	
+		
+func make_invulnerable(duration):
+	invulnerable = true
+	$hitbox.set_collision_mask_value(3, !invulnerable)
+	$".".set_collision_mask_value(3, !invulnerable)
+	animation_blink()  # Inicia el parpadeo
+	await get_tree().create_timer(duration).timeout  # Espera el tiempo de invulnerabilidad
+	invulnerable = false  # Termina el estado de invulnerabilidad
+	$hitbox.set_collision_mask_value(3, !invulnerable)
+	$".".set_collision_mask_value(3, !invulnerable)
+	$AnimatedSprite2D.visible = true  # Asegura que el sprite sea visible al final
+	
+func animation_blink():
+	while invulnerable:
+		print("blink")
+		$AnimatedSprite2D.visible = false  # Oculta el spriteS
+		await get_tree().create_timer(0.05).timeout  # Espera 0.05 segundos
+		print("show")
+		$AnimatedSprite2D.visible = true  # Muestra el sprite
+		await get_tree().create_timer(0.05).timeout  # Espera 0.05 segundos
+
 
 func die():
 	if is_dying:
@@ -88,6 +116,10 @@ func die():
 	await move_player_up_and_down()
 	GLOBAL.lives -= 1
 	become_small()
+	var collectables = get_tree().get_nodes_in_group("collectable")  # Obtiene todos los nodos del grupo
+	for node in collectables:
+		if node:  # Verifica que el nodo no sea nulo
+			node.queue_free()  # Libera el nodo
 	if GLOBAL.lives > 0:
 		print("RELOAD SCENE")
 		get_tree().reload_current_scene()

@@ -35,5 +35,5 @@ func update_animation():
 	animated_sprite_2d.play("hop")
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("Player") && !body.damaged:
 		queue_free()

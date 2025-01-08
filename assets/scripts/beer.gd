@@ -7,6 +7,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	add_to_group("Beer")
+	add_to_group("collectable")
 
 func _physics_process(delta: float) -> void:
 	move_and_slide()
