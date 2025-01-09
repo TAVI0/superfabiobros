@@ -1,8 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://cvdekmr4f3r37"]
+[gd_scene load_steps=23 format=3 uid="uid://cvdekmr4f3r37"]
 
 [ext_resource type="Script" path="res://assets/scripts/player.gd" id="1_17b51"]
 [ext_resource type="Texture2D" uid="uid://6b8ohi06t35w" path="res://assets/sprites/bazzabogan.png" id="1_umj7o"]
 [ext_resource type="Texture2D" uid="uid://cfg2ttkt0lnii" path="res://assets/sprites/bazzalargethongs.png" id="3_21frb"]
+[ext_resource type="Script" path="res://assets/scripts/player_control.gd" id="4_fn8aa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvbjr"]
 atlas = ExtResource("1_umj7o")
@@ -180,5 +181,8 @@ collision_mask = 5
 shape = SubResource("RectangleShape2D_4ogku")
 
 [node name="ThongFireTimer" type="Timer" parent="."]
+
+[node name="PlayerControl" type="Node" parent="."]
+script = ExtResource("4_fn8aa")
 
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
