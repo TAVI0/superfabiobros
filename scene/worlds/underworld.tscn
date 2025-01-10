@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://chlr26plvx6al"]
 
-[ext_resource type="Texture2D" uid="uid://8iuv38morelt" path="res://scene/worlds/lvl2-block.png" id="1_78j32"]
-[ext_resource type="Texture2D" uid="uid://wpn0mp4qa35b" path="res://scene/worlds/lvl2-brick.png" id="2_m8u8b"]
+[ext_resource type="Texture2D" uid="uid://8iuv38morelt" path="res://assets/sprites/lvl2-block.png" id="1_78j32"]
+[ext_resource type="Texture2D" uid="uid://wpn0mp4qa35b" path="res://assets/sprites/lvl2-brick.png" id="2_m8u8b"]
 [ext_resource type="PackedScene" uid="uid://cvdekmr4f3r37" path="res://scene/player.tscn" id="3_48w1n"]
 [ext_resource type="PackedScene" uid="uid://lq1ertd5ucs4" path="res://scene/coin_gui.tscn" id="4_mq22c"]
 [ext_resource type="PackedScene" uid="uid://2wsla5ofe2nv" path="res://scene/pitfall.tscn" id="5_1138t"]

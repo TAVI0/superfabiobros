@@ -56,7 +56,6 @@ position = Vector2(0, 2)
 zoom = Vector2(1.815, 1.815)
 limit_left = 0
 limit_top = 0
-limit_bottom = 648
 drag_horizontal_offset = 0.4
 
 [node name="pitfall" parent="." instance=ExtResource("6_snq54")]
@@ -89,7 +88,7 @@ position = Vector2(760, 552)
 position = Vector2(904, 560)
 
 [node name="BigToad2" parent="enemies" instance=ExtResource("9_jxvbd")]
-position = Vector2(600, 536)
+position = Vector2(280, 608)
 
 [node name="questionblock" parent="enemies" instance=ExtResource("10_jlpeq")]
 position = Vector2(160, 536)

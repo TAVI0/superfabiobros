@@ -3,7 +3,16 @@ extends Node
 var total_coins = 0
 var lives = 30
 enum PlayerState { SMALL, BIG, THONG }
+enum MOVE_STATE {
+	IDLE,
+	RUNNING,
+	JUMPING,
+	FALLING,
+	DIYING,
+}
+
 var current_state = PlayerState.SMALL
+var current_move = MOVE_STATE.IDLE
 
 func spawn_beer_bottle(pos):
 	var BeerBottleScene = load("res://scene/beer.tscn")
