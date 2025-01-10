@@ -4,6 +4,7 @@ enum STATE {
 	IDLE,
 	RUNNING,
 	JUMPING,
+	FALLING
 }
 var current_state:STATE = STATE.IDLE
 
@@ -22,6 +23,7 @@ func _physics_process(delta: float) -> void:
 				print("runing")
 				current_state = STATE.RUNNING
 			elif Input.is_action_just_pressed("ui_up")  and player.is_on_floor():
+				print("jump")
 				current_state = STATE.JUMPING
 		STATE.RUNNING:
 			player.velocity.x = Input.get_axis("ui_left", "ui_right") * SPEED
@@ -33,10 +35,22 @@ func _physics_process(delta: float) -> void:
 				print("idle")
 				current_state = STATE.IDLE
 		STATE.JUMPING:
-			player.velocity.y = JUMP_VELOCITY  # Update player_direction here
-			if player.is_on_floor():
+			if player.is_on_floor() and player.velocity.y >= 0:
+				player.velocity.y = JUMP_VELOCITY
+			if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
+				print("runing")
+				current_state = STATE.RUNNING
+			if player.velocity.y > 0:
+				print("falling")
+				current_state = STATE.FALLING
+		STATE.FALLING:
+			if Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right"):
+				print("runing")
+				current_state = STATE.RUNNING
+			if player.velocity.y >= 0 and player.is_on_floor():
 				print("idle")
 				current_state = STATE.IDLE
+			
 	
 	
 	#if is_dying:
