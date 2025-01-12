@@ -54,6 +54,7 @@ func _physics_process(delta: float) -> void:
 		GLOBAL.MOVE_STATE.DIYING:
 			player.animated_sprite_2d.play("die")
 
+
 	player.move_and_slide()
 	
 

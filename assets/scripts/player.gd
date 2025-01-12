@@ -74,24 +74,46 @@ func die():
 			node.queue_free()  # Libera el nodo
 	if GLOBAL.lives > 0:
 		print("RECARGANDO ESCENA")
+		GLOBAL.current_move = GLOBAL.MOVE_STATE.IDLE
 		get_tree().reload_current_scene()
 	else:
 		get_tree().change_scene_to_file("res://scene/gameover.tscn")
 
 func move_player_up_and_down():
-	$CollisionShape2D.free()
-	$hitbox/CollisionShape2D.free()
+	# Desactivar colisiones para evitar interacciones durante la animación
+	$CollisionShape2D.disabled = true
+	$hitbox/CollisionShape2D.disabled = true
+	$hitbox.set_collision_mask_value(1, false)
+	$".".set_collision_mask_value(1, false)
+	# Desactivar la física del nodo (si es necesario)
+	set_physics_process(false)
+	
+	# Guardar la posición inicial
 	var start_position = position
-	var up_position = start_position + Vector2(0,-100)
-	var down_position = start_position + Vector2(0, 600)
+	var up_distance = 100  # Distancia que sube el personaje
+	var fall_distance = 600  # Distancia que cae el personaje
+
+	# Calcular las posiciones objetivo
+	var up_position = start_position + Vector2(0, -up_distance)
+	var down_position = start_position + Vector2(0, fall_distance)
+
+	# Movimiento hacia arriba
 	while position.y > up_position.y:
-		position.y -=4
-		print("pos >",position.y," up_pos", up_position.y)
-		await  get_tree().create_timer(0.01).timeout
+		position.y -= 5
+		await get_tree().create_timer(0.01).timeout
+
+	# Movimiento hacia abajo (fuera de la pantalla)
 	while position.y < down_position.y:
-		position.y +=4
-		print("pos <",position.y," down_pos", down_position.y)
-		await  get_tree().create_timer(0.01).timeout
+		position.y += 8
+		await get_tree().create_timer(0.01).timeout
+
+	# Reactivar la física y las colisiones
+	set_physics_process(true)
+	$CollisionShape2D.disabled = false
+	$hitbox/CollisionShape2D.disabled = false
+	$hitbox.set_collision_mask_value(1, true)
+	$".".set_collision_mask_value(1, true)
+	
 
 func become_big():
 	GLOBAL.current_state= GLOBAL.PlayerState.BIG
